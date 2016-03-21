@@ -2,6 +2,6 @@
   (:require [clojure.test :refer :all]
             [puppetlabs.torrent-server-core :refer :all]))
 
-(deftest hello-test
+(deftest torrent-test
   (testing "says hello to caller"
-    (is (= "Hello, foo!" (hello "foo")))))
+    (is (= "Hello, foo!" (get-torrent :tracker "foo")))))

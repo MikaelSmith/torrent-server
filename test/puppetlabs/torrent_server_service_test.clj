@@ -4,8 +4,8 @@
             [puppetlabs.trapperkeeper.testutils.bootstrap :refer [with-app-with-empty-config]]
             [puppetlabs.torrent-server-service :as svc]))
 
-(deftest hello-service-test
+(deftest torrent-service-test
   (testing "says hello to caller"
-    (with-app-with-empty-config app [svc/hello-service]
-      (let [hello-service (app/get-service app :HelloService)]
-        (is (= "Hello, foo!" (svc/hello hello-service "foo")))))))
+    (with-app-with-empty-config app [svc/torrent-service]
+      (let [torrent-service (app/get-service app :TorrentService)]
+        (is (= "Hello, foo!" (svc/torrent torrent-service "foo")))))))

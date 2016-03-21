@@ -8,16 +8,16 @@
             [puppetlabs.torrent-server-service :as svc]
             [puppetlabs.torrent-server-web-service :as web-svc]))
 
-(deftest hello-web-service-test
+(deftest torrent-web-service-test
   (testing "says hello to caller"
     (with-app-with-config app
-      [svc/hello-service
-       web-svc/hello-web-service
+      [svc/torrent-service
+       web-svc/torrent-web-service
        jetty9-service
        webrouting-service]
       {:webserver {:host "localhost"
                    :port 8080}
        :web-router-service {
-         :puppetlabs.torrent-server-web-service/hello-web-service "/hello"}}
-      (let [resp (client/get "http://localhost:8080/hello/foo" {:as :text})]
+         :puppetlabs.torrent-server-web-service/torrent-web-service "/torrent"}}
+      (let [resp (client/get "http://localhost:8080/torrent/foo" {:as :text})]
         (is (= "Hello, foo!" (:body resp)))))))

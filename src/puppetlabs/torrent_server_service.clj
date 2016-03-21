@@ -5,24 +5,24 @@
   (:import (java.net InetSocketAddress)
            (com.turn.ttorrent.tracker Tracker)))
 
-(defprotocol HelloService
-  (hello [this caller]))
+(defprotocol TorrentService
+  (torrent [this caller]))
 
 (def tracker (Tracker. (InetSocketAddress. 6969)))
 
-(trapperkeeper/defservice hello-service
-  HelloService
+(trapperkeeper/defservice torrent-service
+  TorrentService
   []
   (init [this context]
-    (log/info "Initializing hello service")
+    (log/info "Initializing torrent service")
     context)
   (start [this context]
-    (log/info "Starting hello service")
+    (log/info "Starting torrent service")
     (.start tracker)
     context)
   (stop [this context]
-    (log/info "Shutting down hello service")
+    (log/info "Shutting down torrent service")
     (.stop tracker)
     context)
-  (hello [this caller]
-         (core/hello tracker caller)))
+  (torrent [this caller]
+           (core/get-torrent tracker caller)))
