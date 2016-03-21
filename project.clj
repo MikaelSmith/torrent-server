@@ -10,8 +10,10 @@
   :dependencies [[org.clojure/clojure "1.6.0"]
                  [compojure "1.2.0"]
                  [org.clojure/tools.logging "0.3.1"]
+                 [org.slf4j/slf4j-log4j12 "1.6.4"]
                  [puppetlabs/trapperkeeper ~tk-version]
-                 [puppetlabs/trapperkeeper-webserver-jetty9 ~tk-jetty9-version]]
+                 [puppetlabs/trapperkeeper-webserver-jetty9 ~tk-jetty9-version]
+                 [com.turn/ttorrent "1.4"]]
 
   :profiles {:dev {:source-paths ["dev"]
                    :dependencies [[puppetlabs/trapperkeeper ~tk-version :classifier "test" :scope "test"]
