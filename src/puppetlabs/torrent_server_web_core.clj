@@ -11,6 +11,6 @@
       (fn [req]
         (log/info "Handling request for caller:" caller)
         {:status  200
-         :headers {"Content-Type" "text/plain"}
+         :headers {"Content-Type" "application/x-bittorrent"}
          :body    (torrent-svc/torrent torrent-service caller)}))
     (route/not-found "Not Found")))
