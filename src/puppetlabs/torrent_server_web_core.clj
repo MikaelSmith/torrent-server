@@ -7,10 +7,13 @@
 (defn app
   [torrent-service]
   (compojure/routes
-    (compojure/GET "/:caller" [caller]
+    (compojure/GET "/:file" [file]
       (fn [req]
-        (log/info "Handling request for caller:" caller)
-        {:status  200
-         :headers {"Content-Type" "application/x-bittorrent"}
-         :body    (torrent-svc/torrent torrent-service caller)}))
+        (log/info "Handling request for file:" file)
+        (if-let [torrent (torrent-svc/torrent torrent-service file)]
+          {:status  200
+           :headers {"Content-Type" "application/x-bittorrent"}
+           :body    torrent}
+          {:status 404
+           :body "Requested file unavailable"})))
     (route/not-found "Not Found")))
