@@ -5,10 +5,18 @@
             [ring.mock.request :as mock]))
 
 (deftest torrent-web-test
-  (testing "says hello to caller"
+  (testing "returns 200 for known file"
     (let [torrent-service (reify torrent-svc/TorrentService
-                            (torrent [this caller] (format "Testing, %s." caller)))
+                            (torrent [this file] (format "Testing, %s." file)))
           ring-app (app torrent-service)
-          response (ring-app (mock/request :get "/foo"))]
+          response (ring-app (mock/request :get "/known-file"))]
       (is (= 200 (:status response)))
-      (is (= "Testing, foo." (:body response))))))
+      (is (= "Testing, known-file." (:body response)))))
+  (testing "returns 404 for unknown file"
+    (let [torrent-service (reify torrent-svc/TorrentService
+                            (torrent [this file] nil))
+          ring-app (app torrent-service)
+          response (ring-app (mock/request :get "/unknown-file"))]
+      (is (= 404 (:status response)))
+      (is (= "Requested file unavailable"))))
+  )

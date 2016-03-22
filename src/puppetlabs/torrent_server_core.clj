@@ -9,7 +9,7 @@
     ))
 
 (defn seed-torrent
-  "Start sharing the specified torrent"
+  "Start sharing the specified torrent; seeding continues indefinitely"
   [torrent file-source]
   (let [shared-torrent (SharedTorrent. torrent (io/file file-source) true)
         client (Client. (InetAddress/getLocalHost) shared-torrent)]

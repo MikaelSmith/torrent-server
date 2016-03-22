@@ -47,6 +47,12 @@ print out the current trapperkeeper application context. Both of these take an
 optional array of keys as a parameter, which is used to retrieve a nested
 subset of the context map.
 
+## Future Improvements
+
+- Search file source on service start to generate a finite list of Clients, so we can clean them up on shutdown.
+- Use HTTPS
+- Use trapperkeeper-authorization
+
 ## License
 
 Copyright © 2016 Michael Smith
