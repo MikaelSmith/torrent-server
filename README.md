@@ -1,6 +1,17 @@
 # torrent-server
 
-A trapperkeeper web app designed to ... well, that part is up to you.
+A simple torrent file server built on [puppetlabs/trapperkeeper](https://github.com/puppetlabs/trapperkeeper).
+It aims to make it simple to serve large files to many clients quickly and with
+low-overhead on the server compared to traditional file servers.
+
+An on-demand torrent server: it serves files out of a (configurable) directory,
+with the file name derived from the URL path. It sets up a BitTorrent tracker;
+then on request ensures a `.torrent` file exists for a requested file (if the file
+exists), announces it to the tracker, starts seeding the file, and returns the
+`.torrent` file to the caller in the response. That `.torrent` file can be used
+to start downloading the file via the BitTorrent protocol.
+
+Communication is currently unauthenticated and transfers done over HTTP.
 
 ## Usage
 
@@ -8,7 +19,17 @@ First, run:
 
     $ lein tk
 
-Then, open a browser and visit: `http://localhost:8080/hello/torrent-server`
+Then, `curl http://localhost:8080/torrent/test-file -o test-file.torrent` to
+start seeding [`test-file`](./dev-resources/test-file) and get the appropriate
+torrent file. That torrent file can then be downloaded via an appropriate
+torrent client, such as examples provided along-side [libtorrent](http://www.libtorrent.org/).
+
+### Configuration
+
+An example configuration is present in [dev-resources/config.conf](./dev-resources/config.conf).
+It contains generic trapperkeeper config, as well as a `torrent-server` section
+- `file-source`: a relative or absolute path to the directory from which to serve files
+- `tracker-port`: the port to use for the BitTorrent tracker
 
 ### Running from the REPL
 
@@ -28,7 +49,6 @@ subset of the context map.
 
 ## License
 
-Copyright © 2016 FIXME
+Copyright © 2016 Michael Smith
 
-Distributed under the Eclipse Public License either version 1.0 or (at
-your option) any later version.
+Distributed under the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0.html)
