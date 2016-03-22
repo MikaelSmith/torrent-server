@@ -1,5 +1,7 @@
 # torrent-server
 
+[![Build Status](https://travis-ci.org/MikaelSmith/torrent-server.svg?branch=master)](https://travis-ci.org/MikaelSmith/torrent-server)
+
 A simple torrent file server built on [puppetlabs/trapperkeeper](https://github.com/puppetlabs/trapperkeeper).
 It aims to make it simple to serve large files to many clients quickly and with
 low-overhead on the server compared to traditional file servers.
