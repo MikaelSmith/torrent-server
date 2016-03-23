@@ -17,4 +17,9 @@
   (testing "returns nil if file not found"
     (with-tracker
       (is (nil? (get-torrent tracker "dev-resources" "a-file")))
-    )))
+      ))
+  (testing "returns nil if unsafe file path requested"
+    (with-tracker
+      (is (nil? (get-torrent tracker "dev-resources" "../dev-resources/test-file")))
+      ))
+  )
