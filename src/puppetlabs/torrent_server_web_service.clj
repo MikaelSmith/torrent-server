@@ -22,6 +22,6 @@
          (let [host (get-in-config [:webserver :host])
                port (get-in-config [:webserver :port])
                url-prefix (get-route this)]
-              (log/infof "Torrent web service started; visit http://%s:%s%s/world to check it out!"
+              (log/infof "Torrent web service started; visit http://%s:%s%s/test-file to check it out!"
                          host port url-prefix))
          context))
